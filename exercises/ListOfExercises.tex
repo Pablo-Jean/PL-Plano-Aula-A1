@@ -1,0 +1,56 @@
+\documentclass[12pt,a4paper]{report}
+%\title{Relatório Ondas Estacionárias}
+% Use ou a sequencia de comandos para configurar a página e o espaçamento,
+\usepackage[top=3cm, bottom=2cm, left=3cm, right=2cm,a4paper]{geometry}
+\usepackage{setspace}
+\usepackage{appendix}
+\usepackage{verbatim}
+\usepackage{bookmark}
+%\singlespacing
+\onehalfspacing 
+%\doublespacing
+
+\usepackage{indentfirst}
+
+%\setlength{\parindent}{3.0cm}  % Altere o espaçamento do parágrafo aqui.
+
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{graphicx,psfrag}
+
+\usepackage{multirow}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\usepackage[T1]{fontenc}
+%\usepackage{palatino}
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{subcaption}
+\usepackage{caption}
+
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+% Escolhe a cor do tema do documento
+\newcommand\CorTema{purple}
+\newcommand\Revisao{1}
+
+% Add if conditional, for put answears of the questions
+\newif\ifanswers
+\answersfalse
+
+\begin{document}
+
+\input{exercises.tex}
+
+\end{document}

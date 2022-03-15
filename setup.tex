@@ -1,0 +1,151 @@
+\usepackage[top=3cm, bottom=2cm, left=3cm, right=2cm,a4paper]{geometry}
+\usepackage{setspace}
+\usepackage{appendix}
+\usepackage{verbatim}
+%\singlespacing
+\onehalfspacing 
+%\doublespacing
+
+\usepackage{indentfirst}
+
+%\setlength{\parindent}{3.0cm}  % Altere o espaçamento do parágrafo aqui.
+
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{graphicx,psfrag}
+\newcommand\cincludegraphics[2][]{\raisebox{-0.3\height}{\includegraphics[#1]{#2}}}
+
+\usepackage{multirow}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\usepackage[T1]{fontenc}
+%\usepackage{palatino}
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{subcaption}
+\usepackage{caption}
+%\usepackage[all]{xy}
+\usepackage[abnt-etal-list=0,abnt-etal-text=it,abnt-and-type=&,abnt-emphasize=bf,abnt-full-initials=yes,alf,bibjustif,abnt-repeated-author-omit=yes]{abntcite}
+
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\bibliographystyle{abntex2-alf}
+
+
+\newtheorem{teorema}{Teorema}[chapter]
+\newtheorem{lema}[teorema]{Lema}
+\newtheorem{corolario}[teorema]{Corolário}
+\newtheorem{proposicao}[teorema]{Proposi\c{c}\~ao}
+\newtheorem{definicao}[teorema]{Defini\c{c}\~ao}
+\theoremstyle{definition}
+\newtheorem{exemplo}{Exemplo}
+%\theoremstyle{remark}
+\newtheorem*{obs}{Observação}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\LL}{\mathbb{L}}
+\newcommand{\M}{\mathbb{M}}
+\newcommand{\G}{\mathbb{G}}
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\Y}{\mathbf{Y}}
+\newcommand{\PX}{\mathcal{P}\left(\mathbf{X}\right)}
+\newcommand{\FX}{\mathcal{F}\left(\X\right)}
+
+\newcommand{\bb}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bbb}{\begin{eqnarray}}
+\newcommand{\eee}{\end{eqnarray}}
+\newcommand{\benu}{\begin{enumerate}}
+\newcommand{\eenu}{\end{enumerate}}
+\newcommand{\tr}{\mbox{tr}}
+\newcommand{\cao}{\c{c}\~ao }
+\newcommand{\coes}{\c{c}\~oes }
+
+\newcommand{\vetx}{\mathbf{x}}
+\newcommand{\vety}{\mathbf{y}}
+\newcommand{\vetw}{\mathbf{w}}
+\newcommand{\vetn}{\mathbf{n}}
+\newcommand{\ima}{\mathbf{a}}
+\newcommand{\ims}{\mathbf{s}}
+\newcommand{\imb}{\mathbf{b}}
+\newcommand{\imt}{\mathbf{t}}
+
+\newcommand{\alphav}{\mbox{\boldmath$\alpha$}}
+\newcommand{\betav}{\mbox{\boldmath$\beta$}}
+\newcommand{\thetav}{\mbox{\boldmath$\theta$}}
+\newcommand{\lambdav}{\mbox{\boldmath$\lambda$}}
+\newcommand{\gammav}{\mbox{\boldmath$\gamma$}}
+\newcommand{\varthetav}{\mbox{\boldmath$\vartheta$}}
+\newcommand{\nuv}{\mbox{\boldmath$\nu$}}
+\newcommand{\sigmav}{\mbox{\boldmath$\sigma$}}
+
+\newcommand{\tn}{\,\mathrm{t}\,}
+\newcommand{\sn}{\,\mathrm{s}\,}
+\newcommand{\agg}{\,\mathrm{a}\,}
+\newcommand{\cc}{\, \mathtt{c} \,}
+\newcommand{\bpm}{\begin{bmatrix}}
+\newcommand{\epm}{\end{bmatrix}}
+
+% \renewcommand{\rmdefault}{phv} % Arial
+% \renewcommand{\sfdefault}{phv} % Arial
+
+\usepackage[toctitles]{titlesec}
+\titleformat{\chapter}
+  {\normalfont\bfseries}{\thechapter}{1em}{\uppercase}
+\titleformat{\section}
+  {\normalfont\bfseries}{\thesection}{0.7em}{\sc}
+\titleformat{\subsection}
+  {\normalfont\bfseries}{\thesubsection}{0.4em}{ }
+
+
+\newcommand{\capitulo}[1]{\chapter{\MakeUppercase{#1}}}
+\newcommand{\secao}[1]{\section{\bf #1}}
+\newcommand{\subsecao}[1]{\subsection{\bf #1}}
+
+\titlespacing{\chapter}{0cm}{1cm}{1cm}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{\thepage}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+\renewcommand{\headrulewidth}{0pt}
+
+\usepackage{tocloft}
+\renewcommand{\cftpartleader}{\cftdotfill{\cftdotsep}} % for parts
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}} % for chapters
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}} % for sections
+
+\makeatletter
+\renewcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
+                    \thispagestyle{fancy}%
+                    \global\@topnum\z@
+                    \@afterindentfalse
+                    \secdef\@chapter\@schapter}
+\makeatother
+
+\renewcommand{\chaptermark}[1]{%
+\markboth{\thechapter.\ #1}{}}
+\setlength{\headheight}{15pt}
+
+\addto\captionsbrazil{\renewcommand{\contentsname}{}}
+\addto\captionsbrazil{\renewcommand{\listfigurename}{}}
+\addto\captionsbrazil{\renewcommand{\listtablename}{}}
+\addto\captionsbrazil{\renewcommand{\bibname}{}}

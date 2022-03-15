@@ -1,0 +1,474 @@
+%!TEX program = pdflatex
+
+\documentclass[12pt,a4paper]{report}
+ 
+\input{setup.tex} %inclui as configurações
+
+% Escolhe a cor do tema do documento
+\newcommand\CorTema{purple}
+\newcommand\Revisao{1}
+
+% Add if conditional, for put answers of the questions
+\newif\ifanswers
+\answerstrue % comment out to hide answers
+
+\begin{document}
+
+%
+% CAPA
+%
+\thispagestyle{empty}
+
+\begin{center}
+    \includegraphics[scale=0.7]{fig/logo.png}
+
+    \vspace{.7cm}
+
+    {\Large \uppercase{Pablo Jean Rozario}}
+
+    \vspace{3cm}
+
+    \Large \MakeUppercase{\textbf{PLANO DE AULA \\
+            Microcontroladores - Turma 1 }}
+
+    \vspace{3cm}
+
+    \normalsize
+
+    \begin{itemize}
+        \item \textbf{Aula} : 1
+        \item \textbf{Turma} : 1
+        \item \textbf{Duração} : 4 Horas
+        \item \textbf{Tema} : Apresentação e Conceitos
+    \end{itemize}
+
+    \vspace{3cm}
+
+    Cambé - PR \\ Dezembro de 2021 \\ Revisão \Revisao
+\end{center}
+
+\newpage
+
+% Blank Page
+
+\thispagestyle{empty}
+\mbox{}
+\newpage
+
+%
+% Criação dos índices.
+%
+
+\begingroup
+\let\clearpage\relax
+\newpage
+\begin{center}
+    \MakeUppercase{\bf Sumário}
+\end{center}
+\tableofcontents
+\thispagestyle{empty}
+
+\newpage
+\begin{center}
+    \MakeUppercase{\bf Lista de Figuras}
+\end{center}
+\listoffigures
+\thispagestyle{empty}
+
+
+\newpage
+
+\chapter{Objetivos}
+
+\section{Objetivo Geral}
+
+Apresentar aos estudantes os conceitos básicos do microcontrolador e o kit que será utilizado durante o Módulo.
+
+\section{Objetivos Específicos}
+
+\begin{itemize}
+    \item Compreender a diferença entre as principais arquiteturas de microcontroladores e a aplicação em Sistemas Embarcados;
+    \item conhecer alguns modelos de microcontroladores de diferentes fabricantes;
+    \item apresentar o kit da STMicroeletronics \textit{NUCLEO-G0B1RE} que será trabalhado na disciplina.
+\end{itemize}
+
+
+\chapter{Metodologia}
+
+\section{Introdução}
+
+No inicio da disciplina, me apresentarei, de forma bem curta e rápida, e em sequência resumirei o que pretendemos trabalhar durante o curso. Sendo utilizado como base a tabela \ref{table:conteudo}.
+
+\begin{table}[H]
+    \centering
+    \caption{Cronograma planejado para o curso de Microcontroladores.}
+    \begin{tabular}{c|c|c|c}
+    \textbf{Aula} & \textbf{Descrição}                                                                                                      & \textbf{Aula} & \multicolumn{1}{c}{\textbf{Descrição}}      \\ \hline \hline
+    \textbf{1}       & \begin{tabular}[c]{@{}c@{}}Apresentação de Conceitos\\ Apresentação do kit STM32\end{tabular}                           & \textbf{7}       & Atividades                                   \\ \hline
+    \textbf{2}       & \begin{tabular}[c]{@{}c@{}}Tipos especiais de (u)int\\ Registradores e Clock do uC\\ Entradas e Saídas IOs\end{tabular} & \textbf{8}       & Comunicação Serial I²C                       \\ \hline 
+    \textbf{3}       & \begin{tabular}[c]{@{}c@{}}Estruturas em C\\Interrupções em IOs\end{tabular}                        & \textbf{9}       & Timers e RTC                                 \\ \hline
+    \textbf{4}       & Conversor A/D e Interrupções                                                                                            & \textbf{10}      & PWM                                          \\ \hline
+    \textbf{5}       & Comunicação Serial UART                                                                                                 & \textbf{11}      & \multirow{2}{*}{Desenvolvimento de Projetos} \\ \cline{1-3}
+    \textbf{6}       & Comunicação Serial SPI                                                                                                  & \textbf{12}      &                                              \\
+    \end{tabular}
+\label{table:conteudo}
+\end{table}
+
+Apresentarei algumas questões questões aos alunos, tais como, "O que é o microcontrolador?" e "Qual a importância dos microcontroladores em nossas vidas". Após as resposta da turma, será respondido que, respectivamente:
+
+"O microcontrolador é um componente eletrônico composto de um processador e periféricos em um único encapsulamento, capaz de executar um programa previamente gravado".
+
+"A importância dos microcontroladores em nossas vidas está na automatização de diversos equipamentos que utilizamos e ainda de dispositivos que carregamos no dia a dia que são dotados de certa autonomia e inteligência, tais como \textit{smartwatch's} e \textit{smartphones}."
+
+\begin{figure}[H]
+    \centering
+    \caption{Exemplos de aplicação de sistemas embarcados.}
+    \begin{subfigure}{.4\textwidth}
+      \centering
+      \includegraphics[width=1\linewidth]{fig/ECU.png}
+      \caption{Central Eletrônica (ECU) de um carro.}
+      \label{fig:example_ECU}
+    \end{subfigure}%
+    \begin{subfigure}{.4\textwidth}
+      \centering
+      \includegraphics[width=1\linewidth]{fig/fd500.png}
+      \caption{Fechadura eletrônica.}
+      \label{fig:example_missle}
+    \end{subfigure}
+    \begin{subfigure}{.4\textwidth}
+      \centering
+      \includegraphics[width=1\linewidth]{fig/missile_module.png}
+      \caption{Módulo de Controle de um Míssil.}
+      \label{fig:plot_p8d25i0_025}
+    \end{subfigure}
+    \begin{subfigure}{.4\textwidth}
+      \centering
+      \includegraphics[width=1\linewidth]{fig/ps4_controller.png}
+      \caption{Placa eletrônica de um controle de PS4.}
+      \label{fig:plot_p8d35i0_05}
+    \end{subfigure}
+    \caption*{Fonte: Google imagens.}
+    \label{figura:application_examples}
+    \end{figure}
+
+Com estas resposta, será apresentado exemplos de produtos e aplicações dos microcontroladores, desde eletrodomésticos e brinquedos, até sistemas bélicos. Pois é importante que o estudante tenha noções de onde pode ser aplicado estes dispositivos.
+
+Será apresentado também a figura , com finalidade de exemplificar como é a estrutura interna de um microcontrolador.
+
+\begin{figure}[H]      % Aqui inicia o ambiente de figura
+\begin{center}		   % centraliza a figura
+\caption{Diagrama de blocos de um microcontrolador.}		% insere a legenda da figura
+\includegraphics[scale=0.5]{fig/basic_microcontroller.png}
+\caption*{Fonte: Google imagens.}
+\label{fig:basic_microcontroller}
+\end{center}
+\end{figure}
+
+Na figura \ref{fig:architecture_microcontroller} tem-se por objetivo exibir de forma um pouco mais detalhada a estrutura de um microcontrolador, buscando fornecer aos estudantes uma compreensão de como os dados fluem internamente.
+
+\begin{figure}[H]      % Aqui inicia o ambiente de figura
+    \begin{center}		   % centraliza a figura
+    \caption{Diagrama do barramento de um microcontrolador.}		% insere a legenda da figura
+    \includegraphics[scale=0.5]{fig/architecture_microcontroller.png}
+    \caption*{Fonte: \cite{ci:microcontroller_8051}.}
+    \label{fig:architecture_microcontroller}
+    \end{center}
+\end{figure}
+
+Deverá ser explicado que o \textbf{Barramento de temporização e controle} é responsável por definir o endereço do dispositivo de IO no barramento de endereços por um período de tempo definido, além do sentido (leitura ou escrita). O \textbf{Barramento de endereços} tem por objetivo informar ao periférico o endereço da informação que deseja alterar ou ler. E por fim, o \textbf{Barramento de dados} é por onde é disponibilizada a informação.
+
+\textbf{Dica Didática} : Utilizar como exemplo, uma conversa com os alunos, onde falo com um e específicos pelo seu nome, e solicito,por exemplo, quantas bolinhas tem na caixa X, e da mesma forma, para outro aluno, digo para guardar Y bolinhas na caixa Z, como forma de ilustrar o barramento.
+
+\section{Microcontrolador ou Microprocessador}
+
+Durante a aula, será apresentada uma tabela \ref{table:microprocessorXmicrocontroller1} para apresentar os grandes pontos de diferença entre microcontroladores e microprocessadores.
+
+\begin{table}[H]
+    \centering
+    \caption{Escolha entre microcontrolador e microprocessador.}
+    \begin{tabular}{c|c|c}
+    \textbf{Característica} & \textbf{Microprocessadores}                                                   & \textbf{Microcontrolador}                                                            \\ \hline
+    \textbf{Periféricos}    & \begin{tabular}[c]{@{}c@{}}Necessita de periféricos\\ externos\end{tabular}   & \begin{tabular}[c]{@{}c@{}}Periféricos integrados\\ no chip\end{tabular}             \\ 
+    \textbf{Memória}        & \begin{tabular}[c]{@{}c@{}}Permite vários formatos\\ de dados\end{tabular}    & \begin{tabular}[c]{@{}c@{}}Poucos tipos de dados (8, 16 ou\\ 32 bits)\end{tabular}   \\
+    \textbf{Processamento}  & \begin{tabular}[c]{@{}c@{}}ALU Complexa e possui\\ coprocessador\end{tabular} & \begin{tabular}[c]{@{}c@{}}ALU limitada e ausência de\\ coprocessamento\end{tabular} \\ 
+    \textbf{Custo}          & Custo elevado                                                                 & Baixo custo, a depender da plataforma                                                \\ 
+    \textbf{Consumo}        & Alto consumo de enegeria                                                      & \begin{tabular}[c]{@{}c@{}}Possui métodos para economia de\\ energia\end{tabular}    \\ 
+    \end{tabular}
+\label{table:microprocessorXmicrocontroller1}
+\end{table}
+
+É importante ressaltar a importância de ter os parâmetros do projetos, não apenas para decidir entre Microcontrolador ou Microprocessador, mas também para definir a escolha do modelo do microcontrolador. 
+
+Como existem vários fabricantes de microcontroladores e ainda, várias linhas dentro dos fabricantes, é importante saber definir qual microcontrolador será escolhido. Como forma de ilustrar isto, a tabela \ref{table:microcontrollers} irá indicar 4 exemplos de microcontroladores de diferentes capacidades.
+
+\begin{table}[H]
+    \centering
+    \caption{Comparativo entre microcontroladores de várias linhas.}
+    \begin{tabular}{c|c|c|c|c}
+    \textbf{}           & \textbf{PIC16F1824} & \textbf{MSP430FR2433} & \textbf{STM32G0B1RE} & \textbf{CC2642R} \\ \hline
+    \textbf{Fabricante} & Microchip           & Texas                 & ST                   & Texas            \\
+    \textbf{Core}       & PIC16               & MSP430                & ARM M0+              & ARM M4F          \\
+    \textbf{Bits}       & 8bits               & 16bits                & 32bits               & 32bits           \\
+    \textbf{Flash}      & 7KB                 & 15.5K                 & 512KB                & 352KB            \\
+    \textbf{RAM}        & 256B                & 4K                    & 144KB                & 80KB             \\
+    \textbf{I/Os}       & 12                  & 19                    & 60                   & 31               \\
+    \textbf{ADC}        & 10bits              & 10bits                & 12bits               & 12bits           \\
+    \textbf{SPI}        & X                   & X                     & X                    & X                \\
+    \textbf{I2C}        & X                   & X                     & X                    & X                \\
+    \textbf{UART}       & X                   & X                     & X                    & X                \\
+    \textbf{EEPROM}     & X                   & -                     & -                    & -                \\
+    \textbf{Extra}      & -                   & FRAM                  & USB OTG              & Bluetooth        \\
+    \end{tabular}
+\label{table:microcontrollers}
+\end{table}
+
+Será importante apontar as diferenças entre as interfaces, principalmente com respeito as capacidades de memórias, que é um dos parâmetros que mais saltam aos olhos. E além destes pontos que estão na tabela, esclarecer que existem mais parâmetros, como quantidade e capacidade dos periféricos, clock máximo, recursos especiais e consumo energético.
+
+
+\section{8bits ou 32bits}
+
+Irei explicar o caso de como quase sempre se desenvolve em C, as diferenças ficam muito transparentes, pois o C irá abstrair muitas etapas das instruções dos microcontroladores, mas quando se trabalha com assembly, fica evidente alguns aspectos, como por exemplo, somar números de 32bits, em nível de assembly é bem simples em um microcontrolador de 32 bits, mas árduo em 8bits.
+
+Informar também aos estudantes, que as diferenças estão mais no tamanho dos registradores, e do barramento, que será do tamanho da arquitetura do microcontrolador. Mas é importante ressaltar que, em tese um microcontrolador de 8 bits poderia endereçar até no máximo 256 bytes de ram/flash, no entanto, alguns microcontroladores possuem uma estratégia de paginação, permitindo ter um barramentos de 16bits para a flash, permitindo endereçar até 64KB.
+
+\section{Arquitetura de Microcontroladores}
+
+É importante desde o começo os estudantes ja terem em mente que existem duas arquiteturas de microcontroladores, para tal, será explicado de forma mais básica sobre cada uma das duas.
+
+Em \cite{ci:von_neu_harv_diff} é explanado um pouco sobre cada uma das arquiteturas, podendo sugerir aos alunos, acesso a esta referencia, para buscar esta e mais informações.
+
+\subsection{Von Neumann}
+
+A arquitetura Von Neumann foi desenvolvida pelo Matemático e Físico John Von Neumann em 1945, é uma arquitetura que tem como base o conceito de armazenar os dados e as instruções em uma mesma memória. ou seja, a memória RAM e a Flash estão no mesmo barramento.
+
+\subsection{Harvard}
+
+Diferente da Von Neumann, na arquitetura Harvard, o barramento da memória de dados e da memória de programa é separada, ou seja, a RAM é separada da Flash.
+
+Foi desenvolvida para superar o gargalo causado pela arquitetura Von Neumann na época.
+
+Aprestarei a figura \ref{fig:compare_h_vn} onde é exibido o esquemático básico de uma arquitetura Von Neumann e uma Harvard.
+
+
+\begin{figure}[H]      % Aqui inicia o ambiente de figura
+\begin{center}		   % centraliza a figura
+\caption{Esquemático de uma arquitetura Von Neumann e Harvard, respectivamente.}		% insere a legenda da figura
+\includegraphics[scale=0.9]{fig/VN_Hardvard_compare.png}
+\caption*{Fonte: Google Imagens.}
+\label{fig:compare_h_vn}
+\end{center}
+\end{figure}
+
+Pela figura, fica bem evidenciado a diferença das arquiteturas, onde o barramento de dados é compartilhado no Von Neumann, e separado na Harvard.
+
+\subsection{Diferenças}
+
+Não existe uma arquitetura melhor que a outra, ambas possuem vantagens e desvantagens, a depender da aplicação em que são empregados os microcontroladores. Em resumo, as diferenças são exibidas na tabela \ref{table:compare_vn_h}, que foi adaptada de \cite{ci:von_neu_harv_diff}.
+
+\begin{table}[H]
+\centering
+\caption{Comparativo entre microcontroladores de várias linhas.}
+    \begin{tabular}{|c|c|}
+    \hline
+    \textbf{Von Neumann}                                                                                                          & \textbf{Harvard}                                                                                          \\ \hline
+    \begin{tabular}[c]{@{}c@{}}O mesmo endereço físico é\\  utilizado para memória de \\ programa e memória de dados\end{tabular} & \begin{tabular}[c]{@{}c@{}}Diferentes endereços físicos são\\ utilizados pelas memórias\end{tabular}      \\ \hline
+    \begin{tabular}[c]{@{}c@{}}O barramento da memória de \\ programa e da memória de\\ dados é compartilhado\end{tabular}        & \begin{tabular}[c]{@{}c@{}}O barramentos das memórias\\ é isolado\end{tabular}                            \\ \hline
+    \begin{tabular}[c]{@{}c@{}}É necessário pelo menos dois\\ ciclos de clock para executar\\ uma única instrução\end{tabular}    & \begin{tabular}[c]{@{}c@{}}Uma instrução pode ser\\ executada em um ciclo de\\ clock\end{tabular}         \\ \hline
+    Possui custo menor                                                                                                            & \begin{tabular}[c]{@{}c@{}}Possui um custo mais elevado\\ se comparado a Von Neumann\end{tabular}         \\ \hline
+    \begin{tabular}[c]{@{}c@{}}Não é possível acessar uma\\ instrução e ler/escrever ao\\ mesmo tempo\end{tabular}                & \begin{tabular}[c]{@{}c@{}}E possível ler/escrever ao mesmo\\ tempo que acessa uma instrução\end{tabular} \\ \hline
+    \begin{tabular}[c]{@{}c@{}}Muito utilizado em computadores\\ e microcontroladores ARM\end{tabular}                            & \begin{tabular}[c]{@{}c@{}}Utilizado em microcontroladores\\ e processamento de sinais\end{tabular}       \\ \hline
+    \end{tabular}
+\label{table:compare_vn_h}
+\end{table}
+
+\section{Registradores}
+
+Segundo \cite{ci:beginner_guide} registradores nada mais são do que locais de memória em que é possível realizar as operação de Escrita e/ou Leitura, como por exemplo a memória RAM, que nada mais é do vários registradores que podem ser lidos e escritos, que tem como característica serem velozes e perderem seus dados ao serem desenergizados.
+
+Mas os microcontroladores possuem os SFRs, ou \textit{Special Function register}, que são, de forma similar a RAM, locais de memória que podem controlar diretamente o hardware do componente, ou o próprio hardware do microcontrolador pode controlalos, para indicar status.
+
+Cada bit do SFR é designado a uma função, este podendo ser um \textit{Control bit} ou um \textit{Flag bit}. Os \textit{Control bits} são como se fossem chaves que acionam determinadas funções do hardware, ou configuram, alguns necessitando apenas de um bit, como um \textbf{enable} para uma interface serial, ou vários bits, como definir um \textit{prescaler}. Um \textit{Flag bit} é controlado diretamente pelo hardware, e seu objetivo é indicar alguma status ou evento que ocorreu no microcontrolador, como, por exemplo, indicar que uma interrupção em um pino de entrada.
+
+Na figura \ref{fig:srf_example} será exibido aos estudantes um diagrama para exemplificar três SFRs de um determinado microcontrolador.
+
+\begin{figure}[H]      % Aqui inicia o ambiente de figura
+    \begin{center}		   % centraliza a figura
+    \caption{Esquema de três SFRs.}		% insere a legenda da figura
+    \includegraphics[scale=0.65]{fig/sfr_example.png}
+    \caption*{Fonte: Autoria própria.}
+    \label{fig:srf_example}
+    \end{center}
+\end{figure}
+
+Todas as informações dos SFRs estão nos datasheets dos componentes, explicitando cada bit de cada registrador, se podem ser lidos e/ou escritos.
+
+Na figura \ref{fig:gpio_port_mode} tem-se um exemplo de registrador que configura o modo de operação de uma GPIO de um microcontrolador, neste exemplo estamos tomando o registrador do STM32G0B1RE, que está disponível em \cite{ci:rm0444}.
+
+
+\begin{figure}[H]      % Aqui inicia o ambiente de figura
+    \begin{center}		   % centraliza a figura
+    \caption{Esquemático de uma arquitetura Von Neumann e Harvard, respectivamente.}		% insere a legenda da figura
+    \includegraphics[scale=0.5]{fig/gpio_port_mode.png}
+    \caption*{Fonte: \cite{ci:rm0444}}
+    \label{fig:gpio_port_mode}
+    \end{center}
+\end{figure}
+
+Nesta figura, será relevante apontar que o documento especifica cada bit do registrador, se suporta leitura e/ou escrita, descrição dos elementos do registrador e o valor do reset do registrador.
+
+\subsection{Program Counter e a Stack}
+
+Ainda tomando como base \cite{ci:beginner_guide}, é importante citar que o contador de programa (\textit{Program Conter} ou simplesmente PC) é um ponteiro que diz para a CPU onde se encontra a próxima instrução a ser executada.
+
+No momento do POR (\textit{Power On Reset}) o contador de programa inicia no endereço $0x0000$, e é incrementado automaticamente ao carregar a instrução, sendo então $0x0001$.
+
+O PC é incrementado automaticamente em 1 a cada instrução executada, até o momento em que o mesmo é modificado pelo programa (causando um \textit{jump}) ou em chamadas de funções, que também realizam um salto no programa, mas que faz uso da \textit{Stack}.
+
+Neste ponto, é interessante apresentar o problema antes de falar da \textit{stack}, após apresentar e questionar sobre, partir para explanação.
+
+A \textit{stack} é uma pilha que é utilizada pelas chamadas de subrotinas, realizando o armazenamento do próximo endereço da chamada da subrotina. A mesma função na lógica de LIFO (\textit{Last In, First Out}) para armazenar os valores para retorno.
+
+Durante a operação, ocorre os seguintes passos:
+
+\begin{enumerate}
+    \item É feito o PUSH na stack do valor do PC na chamada de subrotina ou interrupção;
+    \item o PC é modificado com o endereço de onde inicia a execução da subrotina ou interrupção;
+    \item o programa então pula e executa a subrotina;
+    \item quando ocorre a chamada de \textit{return}, é realizado o POP na pilha e o valor atribuído ao PC;
+    \item o PC retorna a próxima instrução antes da chamada da função ou da ocorrência da interrupção.
+\end{enumerate}
+
+Na figura \ref{fig:stack_pointer} é exemplificado o funcionamento de uma Stack.
+
+\begin{figure}[H]      % Aqui inicia o ambiente de figura
+    \begin{center}		   % centraliza a figura
+    \caption{Exemplo de operação de uma stack.}		% insere a legenda da figura
+    \includegraphics[scale=0.6]{fig/stack_pointer.jpg}
+    \caption*{Fonte: Google imagens.}
+    \label{fig:stack_pointer}
+    \end{center}
+\end{figure}
+
+Um microcontrolador pode implementar a stack de duas formas: Por software e por Hardware. Por software, como é o caso de linhas como STM8, STM32 e entre outras, a stack é armazenada na memória RAM e pode ser definida pelo desenvolvedor no programa, tem por vantagem ser be flexível, mas parte da memória RAM é perdida.
+
+Já por hardware, a stack é implementada através de registradores dedicados à esta funcionalidade, como é o caso da linha PIC da Microchip, a grande vantagem é que não é necessário reservar memória RAM para a funcionalidade, mas o tamanho da \textit{stack} é limitado ao que o hardware oferece.
+
+\section{Set de Instruções}
+
+É importante falar aos estudantes que o conjunto de instruções ou \textit{instruction set} engloba todas as instruções que são compreendidas pelo microcontrolador, que nada mais são do que as operações que o microcontrolador pode fazer e que possui implementado em seu hardware.
+
+Quando um programa é compilado e gravado no microcontrolador, o binário gerado nada mais é do que a sequência de instruções geradas para atingir a finalidade desejada. Abaixo tem-se um exemplo de instruções para o \textit{core} PIC18.
+
+\begin{verbatim}
+    MOVLW 10H        ; Set 0x10 to the WREG
+    MOVF  20H, 1, 0  ; Move 0x10 to the address 0x20   
+    MOVLW 5H         ; Set 0x5 to the WREG
+    ADDWF 20H, 1, 0  ; Sum WREG with value on 0x20 
+                     ; (0x10+0x5) and stores in 0x20
+\end{verbatim}
+
+Cada microcontrolador possui seu \textit{set} de instruções específicos da \textit{CPU}, estes sets são divididos em dois principais grupos, \textbf{RISC} (\textit{Reduced Instruction Set Computer}) e \textbf{CISC} (\textit{Complex Instruction Set}).
+
+\begin{itemize}
+    \item \textbf{RISC} : Arquitetura com pequeno conjunto de instruções mais simples, sendo mais baratos de produzir e permitem um \textit{clock} mais alto pela simplicidade dos circuitos internos. Geralmente é associado a arquitetura Harvard.
+    \item \textbf{CISC} : Arquitetura com uma grande gama de instruções, sendo algumas instruções feita por "microprogramas" gravados na cpu, possuindo ainda unidades de controle poderosas. Geralmente é associado a arquitetura Von Neumann.
+\end{itemize}
+
+Como exemplos, temos a linha PIC e ARM com arquiteturas RISC, e em contraponto, temos a linha 8051 que é baseada em arquitetura RISC. É interessante informar aos estudantes que em \cite{ci:cortex_m0_iss} é possível ter acesso as instruções do núcleo.
+
+\section{Kit de Desenvolvimento NUCLEO-G0B1RE}
+
+Após apresentar um básico sobre microcontroladores, apresentar o kit que iremos utilizar para as aulas o kit da ST Microeletronics, a \textbf{NUCLEO-G0B1RE}, que possui um STM32G0B1RE com um debugger já na placa. Possuindo também terminais de I/Os para ligar com circuitos externos, como botões, LEDs, circuitos integrados e etc.
+
+na figura \ref{fig:nucleog0b1re} temos a foto de um exemplar do kit de desenvolvimento.
+
+\begin{figure}[H]
+    \begin{center}
+    \caption{NUCLEO-G0B1RE, kit de desenvolvimento da ST Microeletronics.}		% insere a legenda da figura
+    \includegraphics[scale=0.6]{fig/nucleog0b1re.png}
+    \caption*{Fonte: Google imagens.}
+    \label{fig:nucleog0b1re}
+    \end{center}
+\end{figure}
+
+Possui como principais características, além das citadas na tabela \ref{table:microcontrollers}:
+
+\begin{itemize}
+    \item Unidade de cálculo de CRC;
+    \item RTC alimentado por bateria;
+    \item controlador DMA;
+    \item DACs de 12bits;
+    \item 15 timers;
+    \item três interfaces I2C;
+    \item seis interfaces USART;
+    \item três UART de baixo consumo;
+    \item três SPI;
+    \item HDMI interface;
+    \item USB OTG.
+\end{itemize}
+
+Outras informações podem ser acessadas em \cite{ci:um2324}, e neste momento distribuir uma versão impressora do documento para cada estudante, para que sempre tenham em mãos informações do \textit{hardware} da placa. 
+
+\section{Sistema de Clocks}
+
+Será abordado sobre o sistema de clocks do microcontrolador, sendo apresentado através do arquivo CubeMX (.ioc) na própria IDE, descrevendo apenas os blocos mais relevantes.
+
+Aqui, destacar que o \textbf{ciclo de máquina} corresponde a um múltiplo do dos ciclos de clock, o que representa quantos ciclos são necessários para executar uma instrução. Por exemplo, microcontroladores PIC requerer 4 ciclos de clock para executar uma instrução.
+
+\section{IDE de Desenvolvimento - STM32CubeIDE}
+
+Será realizada a instalação da ferramenta \textbf{STM32CubeIDE}, que será utilizada para desenvolver as atividades no kit. 
+
+A instalação será feita na distro Ubuntu, do Linux, que é o Sistema Operacional que está instalado nas máquinas.
+
+Se possível, será rodado um firmware exemplo apenas para verificar se o software e as ferramentas de debugger estão funcionando adequadamente e para apresentar como é realizado o debug.
+
+\begin{figure}[H]
+    \begin{center}
+    \caption{Logo do STM32CubeIDE.}		% insere a legenda da figura
+    \includegraphics[scale=0.6]{fig/stm32cubeide.png}
+    \caption*{Fonte: Google imagens.}
+    \label{fig:stm32cubeide}
+    \end{center}
+\end{figure}
+
+
+\chapter{Recursos Didáticos}
+
+Será utilizado lousa e canetas apropriadas, computador com os softwares necessários e projetor.
+
+\chapter{Forma de Avaliação}
+
+Avaliação será feita através das listas de exercícios para serem resolvidas durante as aulas ou no horário reservado.
+
+\newpage
+
+\chapter{Histórico de Revisão}
+
+\subsection*{Revisão 1}
+
+Primeiro documento.
+
+\newpage
+
+\begin{appendices}
+
+    \chapter{Anexos}
+
+    \section{Lista de Exercícios - Resolvida}
+    \input{exercises/exercises.tex}
+
+\end{appendices}
+
+\newpage
+
+\begin{center}
+    \chapter*{REFERÊNCIAS}
+\end{center}
+
+
+\bibliography{referencia}
+
+\endgroup
+
+\end{document}

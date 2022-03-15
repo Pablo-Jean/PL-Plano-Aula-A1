@@ -1,0 +1,109 @@
+% Encoding: UTF-8
+
+@Misc{ci:Hysteresis,
+  author       = {Omrom},
+  title        = {Temperature Controller: Hysteresis},
+  howpublished = {\url{https://www.omron-ap.com/service_support/FAQ/FAQ00549/index.asp}},
+  year         = {2020},
+  note         = {Acessado em 24 de Outubro de 2021},
+}
+
+@Manual{ci:lm35,
+  title  = {LM35 Precision Centigrade Temperature Sensors},
+  author = {Texas Instruments},
+  month  = jan,
+  year   = {2016},
+}
+
+@Misc{ci:basic_adc,
+  author       = {Arrow},
+  title        = {Engineering Resources: Basics of Analog-to-Digital Converters},
+  howpublished = {\url{https://www.arrow.com/en/research-and-events/articles/engineering-resource-basics-of-analog-to-digital-converters}},
+  month        = apr,
+  year         = {2018},
+  note         = {Acesso em 24 de Outubro de 2021},
+}
+
+@Misc{ci:usart,
+  author       = {Microchip},
+  title        = {Using the USART in Asynchronous Mode},
+  howpublished = {\url{http://ww1.microchip.com/downloads/en/devicedoc/usart.pdf}},
+  year         = {2001},
+}
+
+@Misc{ci:pid_explained,
+  title        = {PID Controller Explained},
+  howpublished = {\url{https://pidexplained.com/pid-controller-explained/}},
+  year         = {s.d.},
+}
+
+@Misc{ci:pid_diagram,
+  author       = {SMLease Design},
+  title        = {What is PID Control : Proportional Integral Derivative},
+  howpublished = {\url{https://br.pinterest.com/pin/807903620638875843/}},
+  year         = {s.d.},
+}
+
+@Misc{ci:von_neu_harv_diff,
+  author       = {Geeks for Geeks},
+  title        = {Difference between Von Neumann and Harvard Architecture},
+  howpublished = {\url{https://www.geeksforgeeks.org/difference-between-von-neumann-and-harvard-architecture/}},
+  month        = aug,
+  year         = {2021},
+  note         = {Acesso em 10 de Dezembero de 2021},
+}
+
+@Misc{ci:beginner_guide,
+  author       = {Jon Wilder},
+  title        = {A beginner’s guide to microcontrollers},
+  howpublished = {\url{https://www.microcontrollertips.com/a-beginners-guide-to-microcontrollers-faq/}},
+  month        = dec,
+  year         = {2015},
+  note         = {Acesso em 10 de Dezembro de 2021},
+}
+
+@Misc{ci:cortex_m0_iss,
+  title        = {The Cortex-M0 Unstruction Set},
+  howpublished = {\url{https://developer.arm.com/documentation/dui0497/a/the-cortex-m0-instruction-set}},
+  year         = {2021},
+  note         = {Acesso em 10 de Dezembro de 2021},
+}
+
+@Manual{ci:um2324,
+  title        = {UM2324 - User Manual},
+  organization = {ST Microeletronics},
+  edition      = {4},
+  month        = mar,
+  year         = {2021},
+  note         = {STM32 Nucleo-64 boards (MB1360)},
+}
+
+@Manual{ci:rm0444,
+  title        = {RM0444 - Reference Manual},
+  organization = {ST Microeletronics},
+  edition      = {5},
+  month        = nov,
+  year         = {2020},
+  note         = {STM32G0x1 advanced Arm ® -based 32-bit MCUs},
+}
+
+@Manual{ci:STM32G0B1,
+  title        = {STM32G0B1xB/xC/xE},
+  organization = {ST Microeletronics},
+  edition      = {2},
+  month        = nov,
+  year         = {2021},
+  note         = {Arm ® Cortex ® -M0+ 32-bit MCU, up to 512KB Flash, 144KB RAM, 6x USART, timers, ADC, DAC, comm. I/Fs, 1.7-3.6V},
+}
+
+@Book{ci:microcontroller_8051,
+  title     = {Microcontroladores 8051: teoria do Hardware e do Software: aplicações em controle digital: laboratório e simulação},
+  publisher = {Microcontroladores 8051: teoria do Hardware e do Software: aplicações em controle digital: laboratório e simulação},
+  year      = {2002},
+  author    = {Salvador Pinillos Gimenez},
+  editor    = {Roger Trimer},
+  edition   = {1},
+  isbn      = {9788587918284},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}

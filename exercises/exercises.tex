@@ -1,0 +1,184 @@
+% Macros auxiliares
+
+\newcounter{idx}
+\setcounter{idx}{1}
+
+\newcommand{\question}[1]{ 
+
+    \textbf{\theidx : }#1
+    \stepcounter{idx}
+}
+
+\newcommand{\answer}[1]{
+
+    \ifanswers
+    {
+        %\newline
+        \scriptsize\color{purple}\textbf{R:} #1
+    }
+    \else
+    \vspace{1cm}
+    \fi 
+}
+
+% Cabeçalho para a Lista de Exercícios
+\begin{tabular}{l|ll}
+    \multirow{3}{*}{\includegraphics[width=84px]{fig/logo.png}} & { } & {\LARGE \textbf{Lista de Exercícios \#1 }} \\
+    & { } & {\Large Pado Labs - Microcontroladores} \\
+    & { } & {Introdução aos microcontroladores}   
+    \end{tabular}
+    
+    \vspace{0.5cm}
+    \textit{Tips and Tricks} : Utilizar o \textit{User Manual UM2324} para resolver as questões.
+
+    \textit{Requirements} : Resolva todos os exercícios.
+    \vspace{0.5cm}
+
+    \question{Além dos exemplos citados em sala, poderia citar mais exemplos de aplicação de microcontroladores?}
+
+    \answer{Mouse, teclado, microondas, televisão, roteador, etc.}
+
+
+    \question{Qual a principal diferença entre as memórias voláteis e memórias não voláteis?}
+
+    \answer{A memória volátil perde os dados armazenados ao ser desligada, enquanto que as não voláteis retém os dados mesmo após ser desenergizado.}
+
+
+    \question{Explique a diferença do barramento de endereço para o barramento de controle de um microcontrolador.}
+
+    \answer{O barramento de endereços indica qual a posição da informação a ser alterada ou requerida do periférico, enquanto que o barramento de controle seleciona o periférico desejado e se a operação é leitura ou escrita.}
+
+    
+    \question{Você é um projetista de uma empresa que está desenvolvendo um novo produto que necessitará de um dispostivo programável para efetuar um controle. Este produto tem como alicerce o baixo custo e processamento relativamente pequeno. Tomando isto, é possível que o microcontrolador que melhor se encaixar na sua aplicação seja um de arquitetura \textit{Von Neumann} ou \textit{Harvard}?}
+
+    \answer{Von Neumann, pois são mais baratos de serem produzidos.}
+
+
+    \question{Aproveitando a questão anterior, fale sobre a arquitetura Harvard.}
+
+    \answer{A Arquitetura Harvard tem por grande diferença, ter a memória de dados e a memória de programas separadas, o que implica em melho performance das instruções, mas em um custo mais elevado, além de impossibilitar executar instruções da memória RAM.}
+
+
+    \question{É verdade que o tamanho do barramento de dados (bits) de um microcontrolador é suficiente para escolher um modelo para aplicar em um projeto? Justifique.}
+
+    \answer{Não, pois é necessário também observar outros parâmetros como quantidade de memórias, periféricos e entre outros parâmetros.}
+
+
+    \question{Explique o que são os SRFs.}
+
+    \answer{SFRs são os registrados de funções especiais, que estão conectados ao hardware do microcontrolador, e tem por função controlar funcionalidades do microcontrolador (\textit{control bit} ou indicar algum status (\textit{flag bit})).}
+
+
+    \question{O que ocorre com o microcontrolador caso a \textit{stack} estoure?}
+
+    \answer{O microcontrolador, em geral, força um reset quando ocorre o estouro da \textit{stack}.}
+
+
+    \question{O contador de programa pode ser alterado durante a execução dos programas, cite em que pontos que podem ocorrer a alteração do contador de programa.}
+
+    \answer{O PC pode ser alterado na ocorrência de uma interrupção, na chamada de uma subrotina ou ao chamar a função de \textit{return}, que realiza o \textit{pop} da stack.}
+
+
+    \question{Qual a ordem de entradas e saídas da stack?}
+
+    \answer{Pelo sistema de LIFO, \textit{Last In First Out}, ou seja, quem entrou por último, sai primeiro.}
+
+    \question{Tomando como base a questão anterior, esboce o funcionamento de uma stack.}
+
+    \answer{Diagrama similar ao apresentado nos slides.}
+
+
+    \question{Qual a grande vantagem de se utilizar uma \textit{stack} po software?}
+
+    \answer{É mais flexível, pois permite que o tamanho seja configurado de acordo com a necessidade.}
+
+    \question{A arquitetura RISC permite o microcontrolador operar com \textit{clocks} mais elevados, qual o motivo deste fato?}
+
+    \answer{Como os circuitos internos de uma arquitetura RISC são mais simples, é possível atingir maiores velocidades de processamento.}
+
+    
+    \question{Quais conhecimentos você possuia previamente sobre o tema microcontroladores?}
+
+    \answer{Pessoal.}
+    
+
+    \question{Já trabalhou com microcontroladores? Conte quais e o qual sua opinião sobre eles?}
+
+    \answer{Pessoal.}
+    
+
+    \question{O kit contém LEDs que podem ser controlados pelo programa, quantos este kit nos disponibiliza}
+
+    \answer{O kit disponibiliza um LED para ser controlado pelo programa, indicado pela legenda LD4.}
+    
+
+    \question{Vemos que o kit possui dois botões, um azul e um preto, qual o uso de cada um deles?}
+
+    \answer{O botão USER é ligado em uma entrada do microcontrolador, e sua função é definida pelo desenvolvedor, enquanto que o RESET é ligado ao pino de reset do microcontrolador.}
+    
+
+    \question{A memória flash é onde o microcontrolador armazena os comandos a serem executados, parâmetros de configuração e ainda pode ser utilizada para armazenar dados (memória não volatil). Quantos de capacidade nosso microcontrolador possui?}
+
+    \answer{Na página 8 do documento UM2324, podemos ver que o microcontrolador possui 512KB de memória flash.}
+    
+
+    \question{Ao observar a placa, vemos que a mesma possui dois microcontroladores, um sendo o STM32G0B1RE e o outro se trata de um STM32F103CB. Qual a função do ultimo microcontrolador?}
+
+    \answer{O STM32F103 é o microcontrolador que tem implementar o ST-Link V2, se tratando do debugger que é utilizado para gravar o microcontrolador e realizar o debug.}
+    
+
+    \question{O kit possui um debugger integrado, que possui um interface serial auxiliar e a interface de gravação e debug do microcontrolador, qual o nome desta interface e quais o terminais dessa interface?}
+
+    \answer{A interface e chamada de SWD (Serial Wire Debug), os terminais do SWD são o SWCLK (clock) e SWDIO (entrada e saída de dados), além do RESET e dos pinos de alimentação do conector CN11.}
+    
+
+    \question{Este kit permite que utilizemos  debugger para gravar um microcontrolador externamente (em outra placa, por exemplo), no entanto o que é necessário ser feito e qual conector que é utilizado para realizar esta função?}
+
+    \answer{Remover os Jumpers do CN4 e remover o SB19, que fica no bottom layer da placa.}
+    
+
+    \question{O kit vem de fábrica com um programa exemplo. Descreva o que este programa teste faz.}
+
+    \answer{O programa exemplo pisca o LED LD4 em uma frequência constante, que é alterada ao pressionar o botão USER.}
+    
+
+    \question{É possível alimentar o kit com 4 formas de alimentação, cite-as e indique como liga-lás de forma adequada.}
+
+    \answer{5V\_USB\_STLK, alimentação oriunda do conector USB, o jumper JP2 deve estar nos pinos 1 e 2. VIN, alimentação que suporte de 7 à 12V, o jumper deve estar no pino 3 e 4 do JP2, e a alimentação deve entrar no pino 24 do CN7 ou pino 8 do CN6. O E5V é a alimentação de 5V que pode vir externamente, o Jumper deve estar no pino 5 e 6 do JP2 e alimentar pelo pino 6 do CN7. 5V\_USB\_CHARGER, alimentação oriunda do USB, assim como o 5V\_USB\_STLK, a diferença é que o debugger é desabilitado e, como não há o controle de corrente, o USB do dispositivo que esta provendo a alimentação pode ser danificado, para habilitar o JP2 deve estar com o Jumper na posição 7 e 8.}
+
+    
+    \question{Cite as fontes de clock que o kit permite utilizar e seus respectivos usos.}
+    
+    \answer{LSE, cristal de 32.758kHz utilizado pelo RTC. MCO, sinal de 8MHz gerado pelo ST-Link. HSE, cristal de 8MHz, não implementado no kit, sendo necessário adquiri-lo e solda-lo manualmente.}
+    
+
+    \question{Cite as fontes de reset que o kit permite utilizar para resetar o microcontrolador.}
+    
+    \answer{Botão B2 (RESET), através do ST-Link, pelo pino 3 do CN6 e através do pino 14 do CN7.}
+    
+
+    \question{O ST-Link do kit implementa uma porta COM virtual (serial) através do USB, está porta virtual consome qual periférico do STM32? O Manual UM2324 ainda informa que é possível isolar o periférico, qual é o procedimento?}
+    
+    \answer{Utiliza o periférico UART2. Para isolar a UART2 da porta COM é necessário desabilitar o SB16 e SB18.}
+    
+
+    \question{O kit possui 4 LEDs, denote a função de cada um dos LEDs.}
+    
+    \answer{O LED LD1 é um led bi-color que indica o status do debugger. O Led LD2 é um LED vermelho que acende ao detectar uma sobrecorrente. LED LD3 é ligado ao barramento de 5V e acende ao alimentar a placa. Enquanto que o LED LD4 pode ser utilizado pelo desenvolvedor, através do GPIO PA5.}
+    
+
+    \question{O jumper JP3 presente no kit, referido como $I_{DD}$ possui qual finalidade.}
+    
+    \answer{Permite que seja ligado um amperímetro para medir a corrente de consumo do microcontrolador.}
+    
+
+    \question{Quantos terminais de I/O possui o kit?}
+    
+    \answer{62 terminais de I/O, incluídos de BOOT0 e de osciladores.}
+
+
+    \question{Note que na tabela de IOs do microcontrolador, temos por exemplo várias informações assocaidas ao pino 26: $PC5, ARD\_D0 || UART\_1\_RX$. Explique o porque este e outros pinos tem essa informação associada a tabela.}
+
+    \answer{Os pinos do microcontrolador são multiplexado com outras funções, ou seja, o terminal pode ser alterado para outras funções, além de entrada/saída, quando estes estão conectados a perfiéricos do dispositivo.}
+    
+    % ---- END OF FILE ----
