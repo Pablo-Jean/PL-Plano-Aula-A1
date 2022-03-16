@@ -3,15 +3,15 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
       - develop
     tags:
-      - '*.*.*' # semant versioning :D 
+      - 'v*' # semant versioning :D 
   pull_request:
     branches: 
+      - develop
       - main
     tags:
-      - '*.*.*' # semant versioning :D 
+      - 'v*' # semant versioning :D 
 
 # Job to do
 jobs:
