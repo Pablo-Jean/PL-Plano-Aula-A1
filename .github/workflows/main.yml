@@ -34,6 +34,7 @@ jobs:
         with:
           root_file: main
           compiler: bibtex
+          args: 
       - name: Lesson Plan step-3
         uses: dante-ev/latex-action@latest
         with:
@@ -52,6 +53,7 @@ jobs:
         with:
           root_file: exercises/ListOfExercises
           compiler: bibtex
+          args: 
       - name: List of Exercises step-3
         uses: dante-ev/latex-action@latest
         with:
