@@ -23,40 +23,26 @@ jobs:
       - name: Run echo
         run: echo "Running CI"
 
-      - name: Lesson Plan step-1
+      - name: Lesson Plan step-1 (Pdflatex)
         uses: dante-ev/latex-action@latest
         with:
           root_file: main
           compiler: pdflatex
           args: -interaction=nonstopmode -shell-escape
-      - name: Lesson Plan step-2
+      - name: Lesson Plan step-2 (Bibtex)
         uses: dante-ev/latex-action@latest
         with:
           root_file: main
           compiler: bibtex
           args: 
-      - name: Lesson Plan step-3
+      - name: Lesson Plan step-3 (Pdflatex)
         uses: dante-ev/latex-action@latest
         with:
           root_file: main
           compiler: pdflatex
           args: -interaction=nonstopmode -shell-escape
         
-      - name: List of Exercises step-1
-        uses: dante-ev/latex-action@latest
-        with:
-          working_directory: ./exercises
-          root_file: ListOfExercises
-          compiler: pdflatex
-          args: -interaction=nonstopmode -shell-escape
-      - name: List of Exercises step-2
-        uses: dante-ev/latex-action@latest
-        with:
-          working_directory: ./exercises
-          root_file: ListOfExercises
-          compiler: bibtex
-          args: 
-      - name: List of Exercises step-3
+      - name: List of Exercises Pdflatex
         uses: dante-ev/latex-action@latest
         with:
           working_directory: ./exercises
