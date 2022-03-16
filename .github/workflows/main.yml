@@ -42,22 +42,25 @@ jobs:
           compiler: pdflatex
           args: -interaction=nonstopmode -shell-escape
           
+      - name: Goto exercises directory
+        run: cd exercises
+        
       - name: List of Exercises step-1
         uses: dante-ev/latex-action@latest
         with:
-          root_file: exercises/ListOfExercises
+          root_file: ListOfExercises
           compiler: pdflatex
           args: -interaction=nonstopmode -shell-escape
       - name: List of Exercises step-2
         uses: dante-ev/latex-action@latest
         with:
-          root_file: exercises/ListOfExercises
+          root_file: ListOfExercises
           compiler: bibtex
           args: 
       - name: List of Exercises step-3
         uses: dante-ev/latex-action@latest
         with:
-          root_file: exercises/ListOfExercises
+          root_file: ListOfExercises
           compiler: pdflatex
           args: -interaction=nonstopmode -shell-escape
           
