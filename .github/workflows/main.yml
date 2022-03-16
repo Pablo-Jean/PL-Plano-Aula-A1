@@ -55,6 +55,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: [${{github.workspace}}/main.pdf,${{github.workspace}}/exercises/ListOfExercises.pdf]
-          asset_name: [Aula1.pdf,Lista1.pdf]
+          asset_path: ${{github.workspace}}/main.pdf
+          asset_name: Aula1.pdf
           asset_content_type: pdf
