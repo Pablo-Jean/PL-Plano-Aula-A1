@@ -15,28 +15,50 @@ on:
 
 # Job to do
 jobs:
-  build_lista_exercicios:
+  Build_Plan_and_List:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v2
       - name: Run echo
         run: echo "Running CI"
-      - name: Install TexLive and compile
-        run: | 
-          sudo apt-get update
-          yes | sudo apt-get install texlive-full --fix-missing
+
+      - name: Lesson Plan step-1
+        uses: dante-ev/latex-action@latest
+        with:
+          root_file: main.tex
+          compiler: pdflatex
+          args: -interaction=nonstopmode -shell-escape
+      - name: Lesson Plan step-2
+        uses: dante-ev/latex-action@latest
+        with:
+          root_file: main.aux
+          compiler: bibtex
+      - name: Lesson Plan step-3
+        uses: dante-ev/latex-action@latest
+        with:
+          root_file: main.tex
+          compiler: pdflatex
+          args: -interaction=nonstopmode -shell-escape
           
-      - name: Compile Plan
-        run: |
-          pdflatex -synctex=1 -interaction=nonstopmode -file-line-error main # first compile
-          bibtex main                                                        # bibtex compile 
-          pdflatex -synctex=1 -interaction=nonstopmode -file-line-error main # need this seconds pdflatex compile
-          pdflatex -synctex=1 -interaction=nonstopmode -file-line-error main # and the last one compile, for all referencies
-      - name: Compile exercise
-        run: |
-          cd exercises
-          pdflatex -synctex=1 -interaction=nonstopmode -file-line-error ListofExercises.tex
+      - name: List of Exercises step-1
+        uses: dante-ev/latex-action@latest
+        with:
+          root_file: exercises/ListOfExercises.tex
+          compiler: pdflatex
+          args: -interaction=nonstopmode -shell-escape
+      - name: List of Exercises step-2
+        uses: dante-ev/latex-action@latest
+        with:
+          root_file: exercises/ListOfExercises.aux
+          compiler: bibtex
+      - name: List of Exercises step-3
+        uses: dante-ev/latex-action@latest
+        with:
+          root_file: exercises/ListOfExercises.tex
+          compiler: pdflatex
+          args: -interaction=nonstopmode -shell-escape
+          
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -48,8 +70,8 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Upload Release Asset
-        id: upload-release-asset 
+      - name: Upload Lesson Plan
+        id: upload-release-asset-1
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -57,4 +79,15 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
           asset_path: ${{github.workspace}}/main.pdf
           asset_name: Aula1.pdf
+          asset_content_type: pdf
+          
+      - name: Upload List of Exercises
+        id: upload-release-asset-2
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ${{github.workspace}}/exercises/ListOfExercises.pdf
+          asset_name: Lista1.pdf
           asset_content_type: pdf
