@@ -26,36 +26,36 @@ jobs:
       - name: Lesson Plan step-1
         uses: dante-ev/latex-action@latest
         with:
-          root_file: main.tex
+          root_file: main
           compiler: pdflatex
           args: -interaction=nonstopmode -shell-escape
       - name: Lesson Plan step-2
         uses: dante-ev/latex-action@latest
         with:
-          root_file: main.aux
+          root_file: main
           compiler: bibtex
       - name: Lesson Plan step-3
         uses: dante-ev/latex-action@latest
         with:
-          root_file: main.tex
+          root_file: main
           compiler: pdflatex
           args: -interaction=nonstopmode -shell-escape
           
       - name: List of Exercises step-1
         uses: dante-ev/latex-action@latest
         with:
-          root_file: exercises/ListOfExercises.tex
+          root_file: exercises/ListOfExercises
           compiler: pdflatex
           args: -interaction=nonstopmode -shell-escape
       - name: List of Exercises step-2
         uses: dante-ev/latex-action@latest
         with:
-          root_file: exercises/ListOfExercises.aux
+          root_file: exercises/ListOfExercises
           compiler: bibtex
       - name: List of Exercises step-3
         uses: dante-ev/latex-action@latest
         with:
-          root_file: exercises/ListOfExercises.tex
+          root_file: exercises/ListOfExercises
           compiler: pdflatex
           args: -interaction=nonstopmode -shell-escape
           
