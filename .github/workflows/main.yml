@@ -30,7 +30,7 @@ jobs:
       - name: Compile Plan
         run: |
           pdflatex -synctex=1 -interaction=nonstopmode -file-line-error main.tex # first compile
-          bibtex referencia.bib                                                  # bibtex compile 
+          bibtex main.tex                                                        # bibtex compile 
           pdflatex -synctex=1 -interaction=nonstopmode -file-line-error main.tex # need this seconds pdflatex compile
           pdflatex -synctex=1 -interaction=nonstopmode -file-line-error main.tex # and the last one compile, for all referencies
       - name: Compile exercise
