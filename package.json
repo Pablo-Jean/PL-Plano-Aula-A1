@@ -48,13 +48,11 @@
             "assets": [
               {
                 "path": "main.pdf",
-                "name": "Plano-De-Aula-A1.pdf",
-                "label": "pdf"
+                "name": "Plano-De-Aula-A1.pdf"
               },
               {
                 "path": "exercises/ListOfExercises.pdf",
-                "name": "Lista-de-Exercicios-A1.pdf",
-                "label": "pdf"
+                "name": "Lista-de-Exercicios-A1.pdf"
               }
             ]
           }
