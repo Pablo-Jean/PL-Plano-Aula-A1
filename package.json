@@ -1,0 +1,73 @@
+{
+    "devDependencies": {
+      "@semantic-release/changelog": "github:semantic-release/changelog",
+      "@semantic-release/commit-analyzer": "github:semantic-release/commit-analyzer",
+      "@semantic-release/exec": "github:semantic-release/exec",
+      "@semantic-release/git": "github:semantic-release/git",
+      "@semantic-release/github": "github:semantic-release/github",
+      "@semantic-release/release-notes-generator": "github:semantic-release/release-notes-generator"
+    },
+    "name": "lesson-plan-a1",
+    "author": "Pablo Jean Rozario",
+    "repository": "https://github.com/Pablo-Jean/PL-Plano-Aula-A1",
+    "description": "Lesson Plan - A1",
+    "release": {
+      "prepare": [],
+      "branches": [
+        {
+          "name": "master"
+        },
+        {
+          "name": "develop",
+          "prerelease": true
+        },
+        {
+          "name": "release",
+          "prerelease": true
+        }
+      ],
+      "plugins": [
+        [
+          "@semantic-release/changelog",
+          {
+            "changelogTitle": "CHANGES:",
+            "changelogFile": "CHANGELOG.md"
+          }
+        ],
+        "@semantic-release/commit-analyzer",
+        "@semantic-release/release-notes-generator",
+        [
+          "@semantic-release/exec",
+          {
+            "generateNotesCmd": "node generate_version.js ${nextRelease.version}"
+          }
+        ],
+        [
+          "@semantic-release/github",
+          {
+            "assets": [
+              {
+                "path": "main.tex",
+                "name": "Plano-De-Aula-A1.pdf"
+              },
+              {
+                "path": "exercises/ListOfExercises.pdf",
+                "name": "Lista-de-Exercicios-A1.pdf"
+              }
+            ]
+          }
+        ],
+        "@semantic-release/git",
+        {
+          "assets": [
+            "package.json",
+            "CHANGELOG.md"
+          ],
+          "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        }
+      ]
+    },
+    "dependencies": {
+      "node": "^17.4.0"
+    }
+  }
