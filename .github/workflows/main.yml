@@ -1,0 +1,79 @@
+name: Build LaTeX Document
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches: 
+      - develop
+      - main
+
+# Job to do
+jobs:
+  Build_Plan_and_List:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 'lts/*'
+      - name: Install Semantic-Release
+        run: npm ci
+      - name: Install Semantic-Release Plugins
+        run: npm install semantic-release/changelog semantic-release/exec
+        
+      - name: Version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release --dryRun --no-ci;
+
+      - name: Set current date as env variable
+        run:  echo "NOW=$(date "+%Y.%m.%d-%H.%M.%S")" >> $GITHUB_ENV
+
+      - name: Lesson Plan step-1 (Pdflatex)
+        uses: dante-ev/latex-action@latest
+        with:
+          root_file: main
+          compiler: pdflatex
+          args: -interaction=nonstopmode -shell-escape
+      - name: Lesson Plan step-2 (Bibtex)
+        uses: dante-ev/latex-action@latest
+        with:
+          root_file: main
+          compiler: bibtex
+          args: 
+      - name: Lesson Plan step-3 (Pdflatex)
+        uses: dante-ev/latex-action@latest
+        with:
+          root_file: main
+          compiler: pdflatex
+          args: -interaction=nonstopmode -shell-escape
+        
+      - name: List of Exercises Pdflatex
+        uses: dante-ev/latex-action@latest
+        with:
+          working_directory: ./exercises
+          root_file: ListOfExercises
+          compiler: pdflatex
+          args: -interaction=nonstopmode -shell-escape
+
+      - name: Upload Lesson Plan
+        id: upload-release-asset-1
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ${{github.workspace}}/main.pdf
+          asset_name: Aula1.pdf
+          asset_content_type: pdf
+          
+     # Release and Deploy
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
