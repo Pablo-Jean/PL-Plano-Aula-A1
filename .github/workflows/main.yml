@@ -7,7 +7,7 @@ on:
   pull_request:
     branches: 
       - develop
-      - main
+      - master
 
 # Job to do
 jobs:
