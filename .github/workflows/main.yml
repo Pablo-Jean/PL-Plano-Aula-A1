@@ -16,6 +16,20 @@ jobs:
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v2
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 'lts/*'
+      - name: Install Semantic-Release
+        run: npm ci
+      - name: Install Semantic-Release Plugins
+        run: npm install semantic-release/changelog semantic-release/exec
+        
+      - name: Version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release --dryRun --no-ci;
 
       - name: Set current date as env variable
         run:  echo "NOW=$(date "+%Y.%m.%d-%H.%M.%S")" >> $GITHUB_ENV
@@ -46,17 +60,6 @@ jobs:
           root_file: ListOfExercises
           compiler: pdflatex
           args: -interaction=nonstopmode -shell-escape
-          
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ env.NOW }}
-          release_name: Release ${{ env.NOW }}
-          draft: false
-          prerelease: false
 
       - name: Upload Lesson Plan
         id: upload-release-asset-1
@@ -69,13 +72,8 @@ jobs:
           asset_name: Aula1.pdf
           asset_content_type: pdf
           
-      - name: Upload List of Exercises
-        id: upload-release-asset-2
-        uses: actions/upload-release-asset@v1
+     # Release and Deploy
+      - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: ${{github.workspace}}/exercises/ListOfExercises.pdf
-          asset_name: Lista1.pdf
-          asset_content_type: pdf
+        run: npx semantic-release
