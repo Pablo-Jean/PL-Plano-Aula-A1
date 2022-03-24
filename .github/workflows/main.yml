@@ -6,8 +6,10 @@ on:
       - develop
   pull_request:
     branches: 
+      - release
       - develop
-      - main
+      - master
+
 
 # Job to do
 jobs:
@@ -60,17 +62,6 @@ jobs:
           root_file: ListOfExercises
           compiler: pdflatex
           args: -interaction=nonstopmode -shell-escape
-
-      - name: Upload Lesson Plan
-        id: upload-release-asset-1
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: ${{github.workspace}}/main.pdf
-          asset_name: Aula1.pdf
-          asset_content_type: pdf
           
      # Release and Deploy
       - name: Release

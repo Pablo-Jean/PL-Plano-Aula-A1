@@ -18,11 +18,11 @@
           "name": "master"
         },
         {
-          "name": "develop",
-          "prerelease": true
+            "name": "release",
+            "prerelease": true
         },
         {
-          "name": "release",
+          "name": "develop",
           "prerelease": true
         }
       ],
@@ -47,7 +47,7 @@
           {
             "assets": [
               {
-                "path": "main.tex",
+                "path": "main.pdf",
                 "name": "Plano-De-Aula-A1.pdf"
               },
               {
