@@ -18,11 +18,11 @@
           "name": "master"
         },
         {
-          "name": "develop",
-          "prerelease": true
+            "name": "release",
+            "prerelease": true
         },
         {
-          "name": "release",
+          "name": "develop",
           "prerelease": true
         }
       ],
