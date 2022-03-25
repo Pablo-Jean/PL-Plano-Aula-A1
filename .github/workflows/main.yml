@@ -3,13 +3,12 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - develop
+      - master
   pull_request:
     branches: 
       - release
       - develop
       - master
-
 
 # Job to do
 jobs:
