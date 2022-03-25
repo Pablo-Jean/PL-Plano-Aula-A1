@@ -6,9 +6,9 @@ on:
       - master
   pull_request:
     branches: 
+      - master
       - release
       - develop
-      - master
 
 # Job to do
 jobs:
