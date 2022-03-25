@@ -1,5 +1,7 @@
+## Remove node_modules, they will be downloaded in action
 /node_modules
 
+## Remove .vscode config
 .vscode
 
 ## Core latex/pdflatex auxiliary files:
